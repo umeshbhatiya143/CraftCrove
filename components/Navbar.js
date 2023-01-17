@@ -46,7 +46,7 @@ const Navbar = ({cart, addToCart, removeFromCart, clearCart, subtotal}) => {
           </Link>
           <AiOutlineShoppingCart onClick={toggleCart} className='text-xl md:text-2xl'/>
         </div>
-        <div ref={ref} className={`w-72 h-[100vh] sideCart absolute top-0 right-0 bg-pink-100 p-8 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div ref={ref} className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute top-0 right-0 bg-pink-100 p-8 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
           <h2 className='font-bold text-xl text-center'>Shopping Cart</h2>
           <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl text-pink-500">
             <AiFillCloseCircle/>
@@ -56,7 +56,7 @@ const Navbar = ({cart, addToCart, removeFromCart, clearCart, subtotal}) => {
             {Object.keys(cart).map((k)=> {
              return  <li key={k}>
              <div className="item flex my-5">
-              <div className='w-2/3 font-semibold'>{cart[k].name}</div>
+              <div className='w-2/3 font-semibold'>{cart[k].name}({cart[k].size}/{cart[k].variant})</div>
              <div className='flex font-semibold items-center justify-center w-1/3 text-lg'>
               <AiFillMinusCircle onClick={()=> {removeFromCart(k, 1, cart[k].price,cart[k].name,cart[k].size,cart[k].variant)}} className='cursor-pointer text-pink-500'/> <span className="mx-2">{cart[k].qty}</span><AiFillPlusCircle 
               onClick={()=> {addToCart(k, 1, cart[k].price,cart[k].name,cart[k].size,cart[k].variant)}}
