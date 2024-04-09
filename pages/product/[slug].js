@@ -18,7 +18,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
   // console.log(color, size)
 
   const handleCheckPin = async () => {
-    let pinFetch = await fetch("http://localhost:3000/api/pincode")
+    let pinFetch = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
     let pinJson = await pinFetch.json()
     // pinJson = parseInt(pinJson)
     if (pinJson.includes(parseInt(pin))) {
@@ -55,7 +55,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
 
   const refreshVariant = (newSize, newcolor) => {
     // console.log(newSize,newcolor)
-    let url = `http://localhost:3000/product/${variants[newcolor][newSize][`slug`]}`
+    let url = `${process.env.NEXT_PUBLIC_HOST}/product/${variants[newcolor][newSize][`slug`]}`
     window.location = url
   }
 

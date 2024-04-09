@@ -7,7 +7,7 @@ const Checkout = ({cart, removeFromCart, addToCart, subtotal}) => {
   const ref = useRef()
 
   return (
-    <div className='container px-2 m-auto py-5'>
+    <div className='container pt-32 px-2 m-auto py-5'>
       <h1 className="font-semibold text-3xl py-14 text-center">Checkout</h1>
       <h2 className="font-bold text-xl">1. Delivery Details</h2>
       <div className="m-auto flex my-4">

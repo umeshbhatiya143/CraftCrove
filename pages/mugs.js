@@ -2,43 +2,21 @@ import React from 'react'
 import Link from 'next/link'
 import mongoose from 'mongoose'
 import product from '@/models/product'
+import Card from '@/components/card'
 
 
 const Mugs = ({ products }) => {
   // console.log(products.products)
   return (
     <div>
-      <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap -m-4 justify-center items-center">
-            {Object.keys(products).length===0 && <div>Sorry all the Mugs are currently out of stock, New stocks coming soon, Stay tuned</div> }
+      <section className="pt-32 text-gray-600 body-font">
+        <div className="container  mx-auto">
+          <div className="flex gap-10 flex-wrap  justify-center items-center">
+            {Object.keys(products).length === 0 && <div>Sorry all the Mugs are currently out of stock, New stocks coming soon, Stay tuned</div>}
             {Object.keys(products).map((item) => {
-              return <Link href={`/product/${products[item].slug}`} key={products[item]._id} className="flex lg:w-1/5 md:w-1/2 p-4 w-full cursor-pointer shadow-lg h-78 rounded overflow-hidden item-center"><div >
-                
-                  <img alt="ecommerce" className="m-auto md:m-0 h-[38vh]" src={products[item].img} />
-                
-                <div className="mt-4 text-center md:text-left">
-                  <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{products[item].category}</h3>
-                  <h2 className="text-gray-900 title-font text-lg font-medium">{products[item].title}</h2>
-                  <p className="mt-1">{products[item].price}</p>
-                  <div className='mt-1'>
-                    {products[item].size.includes('S') && <span className='border border-gray-300 px-1 mx-1 '>S</span>}
-                    {products[item].size.includes('M') && <span className='border border-gray-300 px-1 mx-1 '>M</span>}
-                    {products[item].size.includes('L') && <span className='border border-gray-300 px-1 mx-1 '>L</span>}
-                    {products[item].size.includes('XL') && <span className='border border-gray-300 px-1 mx-1 '>XL</span>}
-                    {products[item].size.includes('XXL') && <span className='border border-gray-300 px-1 mx-1 '>XXL</span>}
-                  </div>
-                  <div className="mt-1">
-                    {products[item].color.includes('red') && <button className="border-2 border-gray-300 ml-1 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                    {products[item].color.includes('blue') && <button className="border-2 border-gray-300 ml-1 bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                    {products[item].color.includes('black') && <button className="border-2 border-gray-300 ml-1 bg-black rounded-full w-6 h-6 focus:outline-none"></button>}
-                    {products[item].color.includes('green') && <button className="border-2 border-gray-300 ml-1 bg-green-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                    {products[item].color.includes('yellow') && <button className="border-2 border-gray-300 ml-1 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                    {products[item].color.includes('purple') && <button className="border-2 border-gray-300 ml-1 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                  </div>
-                </div>
-              </div>
-              </Link>
+              return (
+                <Card product={products[item]} />
+              )
             })}
           </div>
         </div>
