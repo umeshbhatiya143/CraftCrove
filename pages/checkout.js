@@ -1,13 +1,69 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 import { AiFillCloseCircle, AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { BsFillBagCheckFill } from 'react-icons/bs';
 
 const Checkout = ({cart, removeFromCart, addToCart, subtotal}) => {
   const ref = useRef()
+  const [amount, setAmount] = useState('');
+
+  const handlePayment = async (event) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/payment`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ amount }),
+    });
+
+    const order = await res.json();
+
+    //predefined template
+    var option = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      amount,
+      name: "CraftCrove",
+      description: "Test Transaction",
+      image: "/logo.png",
+      //passing the orderid geberated above
+      order_id: order.id,
+      handler: function (response) {
+        alert(`Payment successful: ${response.razorpay_payment_id}`);
+      },
+      //user billing Address ,we have pull user details and pass here
+      prefill: {
+        name: name,
+        email: "kanikakur14@gmail,com",
+        contact: "9000000000",
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      //razorpay popup color
+      theme: {
+        color: "#3C096C",
+      },
+    };
+
+    const Razorpay = (await import('razorpay')).default;
+    var rzp1 = new Razorpay(option);
+    //if payment fails
+    rzp1.on("payment.failed", function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
+
+    rzp1.open();
+    event.preventDefault();
+  };
 
   return (
-    <div className='container pt-32 px-2 m-auto py-5'>
+    <div className='container px-2 m-auto py-5'>
       <h1 className="font-semibold text-3xl py-14 text-center">Checkout</h1>
       <h2 className="font-bold text-xl">1. Delivery Details</h2>
       <div className="m-auto flex my-4">
@@ -78,10 +134,12 @@ const Checkout = ({cart, removeFromCart, addToCart, subtotal}) => {
             <span className="font-bold">Subtotal: {subtotal}</span>
         </div>
         <div className="mx-4">
-        <Link href={'/checkout'}>
-          <button className="flex mr-2 text-white bg-pink-500 border-0 py-2 px-2 focus:outline-none hover:bg-pink-600 rounded text-sm">
-           <BsFillBagCheckFill className='m-1' />Pay ₹{subtotal}</button>
-          </Link>
+        {/* <Link href={'/checkout'}> */}
+          <button onClick={handlePayment}
+           className="flex mr-2 text-white bg-pink-500 border-0 py-2 px-2 focus:outline-none hover:bg-pink-600 rounded text-sm">
+           <BsFillBagCheckFill className='m-1' />Pay ₹{subtotal}
+           </button>
+          {/* </Link> */}
         </div>
     </div>
   )

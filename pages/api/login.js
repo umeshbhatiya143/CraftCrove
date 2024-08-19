@@ -13,7 +13,7 @@ const handler = async (req, res) => {
         console.log(originalText)
         if (user) {
             if (user.email === req.body.email && originalText === req.body.password) {
-                var token = jwt.sign({ email:req.email, password:req.password}, 'jwtsecret');
+                var token = jwt.sign({ id: user._id}, 'jwtsecret');
                 res.status(200).json({ success: "true", token:token })
             }
             else {

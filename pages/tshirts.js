@@ -7,10 +7,11 @@ import Card from '@/components/card'
 const Tshirts = ({ products }) => {
   // console.log(products.products)
   return (
-    <div>
-      <section className="pt-32 text-gray-600 body-font">
+
+      <section className="pt-6 text-gray-600 body-font">
         <div className="container mx-auto">
-          <div className="flex gap-10 flex-wrap -m-4 justify-center">
+          <div className="flex justify-center w-full text-3xl font-bold text-pink-500 mb-10">Our Premium Tshirts</div>
+          <div className="flex gap-10 flex-wrap mb-10 justify-center">
             {Object.keys(products).map((item) => {
               return (
 
@@ -20,7 +21,6 @@ const Tshirts = ({ products }) => {
           </div>
         </div>
       </section>
-    </div>
   )
 }
 

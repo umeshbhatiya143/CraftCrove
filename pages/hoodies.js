@@ -8,20 +8,19 @@ import Card from '@/components/card'
 const Hoodies = ({ products }) => {
   // console.log(products.products)
   return (
-    <div>
-      <section className="pt-32 text-gray-600 body-font">
+    <section className="pt-6 text-gray-600 body-font">
         <div className="container mx-auto">
-          <div className="flex gap-10 flex-wrap justify-center items-center">
-            {Object.keys(products).length===0 && <div>Sorry all the hoodies are currently out of stock, New stocks coming soon, Stay tuned</div> }
+          <div className="flex justify-center w-full text-3xl font-bold text-pink-500 mb-10">Our Premium Hoodies</div>
+          <div className="flex gap-10 flex-wrap mb-10 justify-center">
             {Object.keys(products).map((item) => {
               return (
+
                 <Card product = {products[item]}/>
               )
             })}
           </div>
         </div>
       </section>
-    </div>
   )
 }
 

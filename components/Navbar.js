@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { AiFillCloseCircle, AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { BsFillBagCheckFill } from 'react-icons/bs';
 import { MdAccountCircle } from 'react-icons/md';
+import { jwtDecode } from 'jwt-decode';
 
 
 const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subtotal }) => {
@@ -12,21 +13,31 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
   // console.log(cart)
   const ref = useRef()
   const [dropdown, setdropdown] = useState()
+  const [userId, setUserId] = useState()
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      // console.log(decodedToken.id)
+      setUserId(decodedToken.id);
+    }
+  }, [])
 
   const toggleCart = () => {
-    if (ref.current.classList.contains("translate-x-full")) {
-      ref.current.classList.remove("translate-x-full")
-      ref.current.classList.add("translate-x-0")
-    }
-    else if (!ref.current.classList.contains("translate-x-full")) {
+    if (ref.current.classList.contains("translate-x-0")) {
       ref.current.classList.remove("translate-x-0")
       ref.current.classList.add("translate-x-full")
+    }
+    else if (ref.current.classList.contains("translate-x-full")) {
+      ref.current.classList.remove("translate-x-full")
+      ref.current.classList.add("translate-x-0")
     }
   }
 
   return (
 
-    <div className="flex h-24 flex-col md:flex-row md:justify-start justify-center items-center mb-1 shadow-md fixed bg-white w-[100%] z-10">
+    <div className="z-20 flex h-24 px-20 flex-col md:flex-row md:justify-start justify-center items-center mb-1 shadow-md fixed bg-white w-[100%]">
       <div className="w-80 ">
         <Link href="/" legacyBehavior>
           <a className="">
@@ -39,16 +50,17 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
         <ul className="flex items-center space-x-6 font-bold md:text-md">
           <Link href="/tshirts" legacyBehavior><a><li>Tshirts</li></a></Link>
           <Link href="/hoodies" legacyBehavior><a><li>Hoodies</li></a></Link>
-          <Link href="/stickers" legacyBehavior><a><li>Stickers</li></a></Link>
-          <Link href="/mugs" legacyBehavior><a><li>Mugs</li></a></Link>
+          <Link href="/jeans" legacyBehavior><a><li>Jeans</li></a></Link>
+          <Link href="/caps" legacyBehavior><a><li>Caps</li></a></Link>
+          <Link href="/shoes" legacyBehavior><a><li>Shoes</li></a></Link>
         </ul>
       </div>
-      <div className="flex cursor-pointer cart items-center absolute right-0 mx-5">
+      <div className="flex cursor-pointer cart items-center absolute right-20 mx-5">
         {/* show dropdown when hover on accountcircle */}
         <span onMouseOver={() => { setdropdown(true) }} onMouseLeave={() => { setdropdown(false) }}>
           {dropdown && <div className="absolute right-12 bg-white shadow-lg border top-8 py-2 rounded-md px-5 w-32">
             <ul>
-              <Link href={"/myAccount"}><a><li className='py-1 hover:text-pink-700 text-sm font-bold'>My Account</li></a> </Link>
+              <Link href={`/profile/${userId}`}><a><li className='py-1 hover:text-pink-700 text-sm font-bold'>My Account</li></a> </Link>
               <Link href={"/orders"}><a><li className='py-1 hover:text-pink-700 text-sm font-bold'>Orders</li></a> </Link>
               <li onClick={logout} className='py-1 hover:text-pink-700 text-sm font-bold'>Logout</li>
             </ul>

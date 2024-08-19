@@ -8,23 +8,28 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Card from '@/components/card';
 import product from '@/models/product'
+import { Typewriter } from 'react-simple-typewriter'
+import Jeans from './jeans';
 
 const inter = Inter({ subsets: ['latin'] })
 
-const Home = ({ Tshirts, Hoodies, Stickers, Mugs }) => {
+const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
 
   const slideContent = [
     {
-      image: 'tshirts.jpeg'
+      image: 'tshirts.webp'
     },
     {
       image: 'hoodies.webp',
     },
     {
-      image: 'mugs.jpg',
+      image: 'shoes.jpg',
     },
     {
-      image: 'stickers.jpg'
+      image: 'jeans.png'
+    },
+    {
+      image: 'caps.jpg'
     }
   ];
 
@@ -57,7 +62,7 @@ const Home = ({ Tshirts, Hoodies, Stickers, Mugs }) => {
 
 
       {/* slider  */}
-      <section className="h-screen relative overflow-hidden">
+      <section className="relative overflow-hidden">
         <Swiper
           modules={[Autoplay]}
           slidesPerView={1}
@@ -73,20 +78,47 @@ const Home = ({ Tshirts, Hoodies, Stickers, Mugs }) => {
             slideContent.map((slide) => {
               return (
                 <SwiperSlide>
-                  <div className="w-full !important flex items-center justify-center">
-                    <img src={slide.image} alt="" className='w-full !important' />
+                  <div className="w-full h-[94vh] flex items-center justify-center">
+                    <img src={slide.image} alt="" className='h-full w-full object-cover' />
                   </div>
                 </SwiperSlide>
               )
             })
           }
         </Swiper>
+
+        {/*desc */}
+        <div className='absolute z-10 top-0 w-full h-screen flex justify-center items-center'>
+          <div className="flex flex-col gap-3 items-center -mt-14 justify-center w-[1000px] h-[600px] text-white bg-glassy px-28 rounded-lg shadow-md">
+            <h2 className="text-6xl font-black mb-4">CraftCrove</h2>
+            <span className="text-1xl font-bold text-pink-500">
+              <Typewriter
+                words={['Discover the latest trends in fashion.',
+                  'Elevate your style with our exclusive collections.',
+                  'Find your perfect fit with StyleHub.',
+                  'Fashion-forward apparel and accessories just for you.',]}
+                loop={true}
+                cursor
+                cursorStyle='|'
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
+            </span>
+            <p className="text-lg mb-8">Explore the ultimate collection of t-shirts, jeans, hoodies, caps, and shoes.</p>
+            {/* <div className="typewriter-container">
+      <span className="typewriter">Typing out some text about StyleHub...</span>
+    </div> */}
+          </div>
+        </div>
       </section>
+
+      <hr/>
 
       {/* tshirts */}
       <section className="body-font bg-gray-50">
         <div className="container mx-auto px-5 py-24">
-          <h4 className="mb-20 text-3xl font-bold text-center text-gray-900 sm:text-5xl">
+          <h4 className="mb-20 text-3xl font-bold text-center text-pink-500 sm:text-5xl">
             Our Premium T-Shirts
           </h4>
           <div className="flex flex-wrap gap-10">
@@ -96,12 +128,12 @@ const Home = ({ Tshirts, Hoodies, Stickers, Mugs }) => {
           </div>
         </div>
       </section>
-
+      <hr/>
 
       {/* hoodies */}
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
-          <h4 className="mb-20 text-3xl font-bold text-center text-gray-900 sm:text-5xl">
+          <h4 className="mb-20 text-3xl font-bold text-center text-pink-500 sm:text-5xl">
             Our Premium Hoodies
           </h4>
           <div className="flex flex-wrap -m-4 ">
@@ -115,39 +147,62 @@ const Home = ({ Tshirts, Hoodies, Stickers, Mugs }) => {
         </div>
       </section>
 
-      {/* stickers */}
+      <hr/>
+
+      {/* jeans */}
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
-          <h4 className="mb-20 text-3xl font-bold text-center text-gray-900 sm:text-5xl">
-            Our Premium Stickers
+          <h4 className="mb-20 text-3xl font-bold text-center text-pink-500 sm:text-5xl">
+            Our Premium Jeans
           </h4>
           <div className="flex flex-wrap -m-4">
-            {Object.keys(Stickers).map((item) => {
+            {Object.keys(Jeans).map((item) => {
               return (
 
-                <Card product={Stickers[item]} />
+                <Card product={Jeans[item]} />
               )
             })}
           </div>
         </div>
       </section>
 
-      {/* mugs */}
+      <hr/>
+
+      {/* caps */}
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
-          <h4 className="mb-20 text-3xl font-bold text-center text-gray-900 sm:text-5xl">
-            Our Premium Mugs
+          <h4 className="mb-20 text-3xl font-bold text-center text-pink-500 sm:text-5xl">
+            Our Premium Caps
           </h4>
           <div className="flex flex-wrap -m-4">
-            {Object.keys(Mugs).map((item) => {
+            {Object.keys(Caps).map((item) => {
               return (
 
-                <Card product={Mugs[item]} />
+                <Card product={Caps[item]} />
               )
             })}
           </div>
         </div>
       </section>
+<hr/>
+      {/* shoes */}
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 py-24 mx-auto">
+          <h4 className="mb-20 text-3xl font-bold text-center text-pink-500 sm:text-5xl">
+            Our Premium Shoes
+          </h4>
+          <div className="flex flex-wrap -m-4">
+            {Object.keys(Shoes).map((item) => {
+              return (
+
+                <Card product={Shoes[item]} />
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <hr/>
 
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
@@ -233,7 +288,7 @@ export async function getServerSideProps(context) {
   };
 
   // Query for the latest 3 products of each category
-  const categories = ['Tshirts', 'Hoodies', 'Stickers', 'Mugs'];
+  const categories = ['Tshirts', 'Hoodies', 'Jeans', 'Caps', 'Shoes'];
   let results = {};
 
   for (let category of categories) {
@@ -246,8 +301,9 @@ export async function getServerSideProps(context) {
     props: {
       Tshirts: JSON.parse(JSON.stringify(results['Tshirts'])),
       Hoodies: JSON.parse(JSON.stringify(results['Hoodies'])),
-      Stickers: JSON.parse(JSON.stringify(results['Stickers'])),
-      Mugs: JSON.parse(JSON.stringify(results['Mugs'])),
+      Jeans: JSON.parse(JSON.stringify(results['Jeans'])),
+      Caps: JSON.parse(JSON.stringify(results['Caps'])),
+      Shoes: JSON.parse(JSON.stringify(results['Shoes'])),
     },
   };
 }

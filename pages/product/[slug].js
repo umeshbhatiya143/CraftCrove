@@ -15,7 +15,8 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
   const [color, setcolor] = useState(product.color)
   const [size, setsize] = useState(product.size)
 
-  // console.log(color, size)
+  // console.log(product)
+  const sizesArray = product.size.split(', ');
 
   const handleCheckPin = async () => {
     let pinFetch = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
@@ -61,12 +62,12 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
 
 
   return (
-    <section className="text-gray-600 body-font overflow-hidden pt-20">
+    <section className="text-gray-600 body-font overflow-hidden">
       <ToastContainer />
-      <div className="container px-5 md:py-24 mx-auto">
-        <div className="lg:w-4/5 mx-auto flex flex-wrap justify-center">
-          <a className="flex relative h-80 md:mt-10 mx-auto rounded overflow-hidden justify-center">
-            <img alt="ecommerce" className=" m-auto md:m-0 h-[38vh] block" src={product.img} />
+      <div className=" mt-4 mb-4 px-5 py-10 mx-auto ">
+        <div className="lg:w-4/5 h-[80%] flex items-center mx-auto flex flex-wrap justify-center">
+          <a className="flex  relative  mx-auto rounded overflow-hidden justify-center">
+            <img alt="ecommerce" className="h-[80%] m-auto md:m-0  block" src={product.img} />
           </a>
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">Codewear</h2>
@@ -122,11 +123,16 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
                 <span className="mr-3">Size</span>
                 <div className="relative">
                   <select value={size} onChange={(e) => { refreshVariant(e.target.value, color) }} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
-                    {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
+                    {/* {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
                     {Object.keys(variants[color]).includes('M') && <option value={'M'}>M</option>}
                     {Object.keys(variants[color]).includes('L') && <option value={'L'}>L</option>}
                     {Object.keys(variants[color]).includes('XL') && <option value={'XL'}>XL</option>}
-                    {Object.keys(variants[color]).includes('XXL') && <option value={'XXL'}>XXL</option>}
+                    {Object.keys(variants[color]).includes('XXL') && <option value={'XXL'}>XXL</option>} */}
+                    {sizesArray.map((size, idx)=>{
+                      return (
+                        <option value={`${size}`}>{size}</option>
+                      )
+                    })}
                   </select>
                   <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4" viewBox="0 0 24 24">
@@ -158,7 +164,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
                 </svg>
               </button>
             </div>
-            <div className="pin mt-6 flex space-x-2 text-sm">
+            {/* <div className="pin mt-6 flex space-x-2 text-sm">
               <input onChange={handleOnChangePin} type="text" name="" id="" className='px-2 border-2 border-gray-50-400 rounded-md' />
               <button onClick={handleCheckPin} className="flex ml-14 text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded">Check</button>
             </div>
@@ -167,7 +173,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
             </div>}
             {(service && service != null) && <div className='text-green-700 text-sm mt-3'>
               yeh! pincode is serviceable
-            </div>}
+            </div>} */}
           </div>
         </div>
       </div>
