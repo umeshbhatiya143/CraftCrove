@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { useSelector, useDispatch } from 'react-redux'
-import { toggleLogin, toggleSignup, loginUser } from '@/store/slices';
 import Loader from '@/assets/loader.gif'
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -9,7 +7,6 @@ import Image from 'next/image';
 import { jwtDecode } from 'jwt-decode';
 
 const AdminLogin = () => {
-    const dispatch = useDispatch()
     const router = useRouter()
 
     const [values, setValues] = useState({

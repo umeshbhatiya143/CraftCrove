@@ -128,9 +128,9 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
                     {Object.keys(variants[color]).includes('L') && <option value={'L'}>L</option>}
                     {Object.keys(variants[color]).includes('XL') && <option value={'XL'}>XL</option>}
                     {Object.keys(variants[color]).includes('XXL') && <option value={'XXL'}>XXL</option>} */}
-                    {sizesArray.map((size, idx)=>{
+                    {sizesArray.map((size, index) => {
                       return (
-                        <option value={`${size}`}>{size}</option>
+                        <option value={`${size}`} key={index}>{size}</option>
                       )
                     })}
                   </select>

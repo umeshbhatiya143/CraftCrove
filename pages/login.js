@@ -3,18 +3,18 @@ import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const Login = () => {
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
   const router = useRouter()
 
-  //if user already logged in then redirect to homepage
   useEffect(() => {
     if(localStorage.getItem("token")){
       router.push("/");
     }
-  }, [])
+  }, [router]) // Dependency added
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -44,7 +44,6 @@ const Login = () => {
         theme: "light",
       });
 
-
       setTimeout(() => {
         router.push(process.env.NEXT_PUBLIC_HOST)
       }, 1000)
@@ -71,16 +70,25 @@ const Login = () => {
       setpassword(e.target.value)
     }
   }
+
   return (
     <div className="flex min-h-full items-center justify-center pt-[10rem] pb-20  px-4 sm:px-6 lg:px-8">
       <ToastContainer />
       <div className="w-full max-w-md space-y-8">
         <div>
-          <img className="mx-auto h-12 w-auto" src="/logoCircle.png" alt="Your Company " />
+          <Image
+            className="mx-auto h-12 w-auto"
+            src="/logoCircle.png"
+            alt="Your Company"
+            width={48} 
+            height={48} 
+            priority
+          />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or
-            <Link href={'/signup'} legacyBehavior><a className="font-medium text-pink-600 hover:text-pink-500"> SignUp</a>
+            <Link href={'/signup'} legacyBehavior>
+              <a className="font-medium text-pink-600 hover:text-pink-500"> SignUp</a>
             </Link>
           </p>
         </div>
@@ -98,7 +106,6 @@ const Login = () => {
           </div>
 
           <div className="flex items-center justify-between">
-
             <div className="text-sm">
               <Link href={'/forgotPassword'} legacyBehavior >
                 <a className="font-medium text-pink-600 hover:text-pink-500">Forgot your password?</a>

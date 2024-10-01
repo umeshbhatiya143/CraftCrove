@@ -75,11 +75,17 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
         >
 
           {
-            slideContent.map((slide) => {
+            slideContent.map((slide,index) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={index}>
                   <div className="w-full h-[94vh] flex items-center justify-center">
-                    <img src={slide.image} alt="" className='h-full w-full object-cover' />
+                    <Image
+                      src={slide.image}
+                      alt="slider image"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+
                   </div>
                 </SwiperSlide>
               )
@@ -113,7 +119,7 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
         </div>
       </section>
 
-      <hr/>
+      <hr />
 
       {/* tshirts */}
       <section className="body-font bg-gray-50">
@@ -123,12 +129,12 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
           </h4>
           <div className="flex flex-wrap gap-10">
             {Object.keys(Tshirts).map((item, index) => (
-              <Card product={Tshirts[item]} />
+              <Card product={Tshirts[item]} key={index}/>
             ))}
           </div>
         </div>
       </section>
-      <hr/>
+      <hr />
 
       {/* hoodies */}
       <section className="text-gray-600 body-font">
@@ -137,17 +143,17 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             Our Premium Hoodies
           </h4>
           <div className="flex flex-wrap -m-4 ">
-            {Object.keys(Hoodies).map((item) => {
+            {Object.keys(Hoodies).map((item, index) => {
               return (
 
-                <Card product={Hoodies[item]} />
+                <Card product={Hoodies[item]} key={index}/>
               )
             })}
           </div>
         </div>
       </section>
 
-      <hr/>
+      <hr />
 
       {/* jeans */}
       <section className="text-gray-600 body-font">
@@ -156,17 +162,17 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             Our Premium Jeans
           </h4>
           <div className="flex flex-wrap -m-4">
-            {Object.keys(Jeans).map((item) => {
+            {Object.keys(Jeans).map((item, index) => {
               return (
 
-                <Card product={Jeans[item]} />
+                <Card product={Jeans[item]} key={index}/>
               )
             })}
           </div>
         </div>
       </section>
 
-      <hr/>
+      <hr />
 
       {/* caps */}
       <section className="text-gray-600 body-font">
@@ -175,16 +181,16 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             Our Premium Caps
           </h4>
           <div className="flex flex-wrap -m-4">
-            {Object.keys(Caps).map((item) => {
+            {Object.keys(Caps).map((item, index) => {
               return (
 
-                <Card product={Caps[item]} />
+                <Card product={Caps[item]} key={index}/>
               )
             })}
           </div>
         </div>
       </section>
-<hr/>
+      <hr />
       {/* shoes */}
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
@@ -192,17 +198,17 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             Our Premium Shoes
           </h4>
           <div className="flex flex-wrap -m-4">
-            {Object.keys(Shoes).map((item) => {
+            {Object.keys(Shoes).map((item, index) => {
               return (
 
-                <Card product={Shoes[item]} />
+                <Card product={Shoes[item]} key={index}/>
               )
             })}
           </div>
         </div>
       </section>
 
-      <hr/>
+      <hr />
 
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
@@ -213,7 +219,14 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             {testimonials.map((testimonial) => (
               <div key={testimonial.id} className="p-4 md:w-1/2 w-full">
                 <div className="h-full bg-gray-100 p-8 rounded">
-                  <img alt="testimonial" className="w-24 h-24 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src={testimonial.img} />
+                  <Image
+                    alt="testimonial"
+                    src={testimonial.img}
+                    width={96}
+                    height={96}
+                    className="w-24 h-24 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
+                  />
+
                   <p className="leading-relaxed mb-6">{testimonial.comment}</p>
                   <a className="inline-flex items-center">
                     <span className="flex-grow flex flex-col pl-4">
