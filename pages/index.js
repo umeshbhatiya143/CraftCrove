@@ -7,29 +7,29 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import Card from '@/components/card';
-import product from '@/models/product'
+import Product from '@/models/product'
 import { Typewriter } from 'react-simple-typewriter'
 import Jeans from './jeans';
 
 const inter = Inter({ subsets: ['latin'] })
 
-const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
+const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} }) => {
 
   const slideContent = [
     {
-      image: 'tshirts.webp'
+      image: '/tshirts.webp' // Add a leading slash
     },
     {
-      image: 'hoodies.webp',
+      image: '/hoodies.webp', // Add a leading slash
     },
     {
-      image: 'shoes.jpg',
+      image: '/shoes.jpg', // Add a leading slash
     },
     {
-      image: 'jeans.png'
+      image: '/jeans.png' // Add a leading slash
     },
     {
-      image: 'caps.jpg'
+      image: '/caps.jpg' // Add a leading slash
     }
   ];
 
@@ -60,7 +60,6 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
       {/* slider  */}
       <section className="relative overflow-hidden">
         <Swiper
@@ -73,27 +72,21 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
           loop={true}
           className="relative"
         >
-
-          {
-            slideContent.map((slide,index) => {
-              return (
-                <SwiperSlide key={index}>
-                  <div className="w-full h-[94vh] flex items-center justify-center">
-                    <Image
-                      src={slide.image}
-                      alt="slider image"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-
-                  </div>
-                </SwiperSlide>
-              )
-            })
-          }
+          {slideContent.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <div className="w-full h-[94vh] flex items-center justify-center">
+                <Image
+                  src={slide.image}
+                  alt="slider image"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
 
-        {/*desc */}
+        {/* desc */}
         <div className='absolute z-10 top-0 w-full h-screen flex justify-center items-center'>
           <div className="flex flex-col gap-3 items-center -mt-14 justify-center w-[1000px] h-[600px] text-white bg-glassy px-28 rounded-lg shadow-md">
             <h2 className="text-6xl font-black mb-4">CraftCrove</h2>
@@ -112,9 +105,6 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
               />
             </span>
             <p className="text-lg mb-8">Explore the ultimate collection of t-shirts, jeans, hoodies, caps, and shoes.</p>
-            {/* <div className="typewriter-container">
-      <span className="typewriter">Typing out some text about StyleHub...</span>
-    </div> */}
           </div>
         </div>
       </section>
@@ -128,9 +118,9 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             Our Premium T-Shirts
           </h4>
           <div className="flex flex-wrap gap-10">
-            {Object.keys(Tshirts).map((item, index) => (
+            {Object.keys(Tshirts).length > 0 ? Object.keys(Tshirts).map((item, index) => (
               <Card product={Tshirts[item]} key={index}/>
-            ))}
+            )) : <p>No T-Shirts available</p>}
           </div>
         </div>
       </section>
@@ -143,12 +133,9 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             Our Premium Hoodies
           </h4>
           <div className="flex flex-wrap -m-4 ">
-            {Object.keys(Hoodies).map((item, index) => {
-              return (
-
-                <Card product={Hoodies[item]} key={index}/>
-              )
-            })}
+            {Object.keys(Hoodies).length > 0 ? Object.keys(Hoodies).map((item, index) => (
+              <Card product={Hoodies[item]} key={index}/>
+            )) : <p>No Hoodies available</p>}
           </div>
         </div>
       </section>
@@ -162,12 +149,9 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             Our Premium Jeans
           </h4>
           <div className="flex flex-wrap -m-4">
-            {Object.keys(Jeans).map((item, index) => {
-              return (
-
-                <Card product={Jeans[item]} key={index}/>
-              )
-            })}
+            {Object.keys(Jeans).length > 0 ? Object.keys(Jeans).map((item, index) => (
+              <Card product={Jeans[item]} key={index}/>
+            )) : <p>No Jeans available</p>}
           </div>
         </div>
       </section>
@@ -181,16 +165,14 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             Our Premium Caps
           </h4>
           <div className="flex flex-wrap -m-4">
-            {Object.keys(Caps).map((item, index) => {
-              return (
-
-                <Card product={Caps[item]} key={index}/>
-              )
-            })}
+            {Object.keys(Caps).length > 0 ? Object.keys(Caps).map((item, index) => (
+              <Card product={Caps[item]} key={index}/>
+            )) : <p>No Caps available</p>}
           </div>
         </div>
       </section>
       <hr />
+
       {/* shoes */}
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
@@ -198,18 +180,16 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
             Our Premium Shoes
           </h4>
           <div className="flex flex-wrap -m-4">
-            {Object.keys(Shoes).map((item, index) => {
-              return (
-
-                <Card product={Shoes[item]} key={index}/>
-              )
-            })}
+            {Object.keys(Shoes).length > 0 ? Object.keys(Shoes).map((item, index) => (
+              <Card product={Shoes[item]} key={index}/>
+            )) : <p>No Shoes available</p>}
           </div>
         </div>
       </section>
 
       <hr />
 
+      {/* Testimonials */}
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <h2 className="mb-12 text-3xl font-bold text-center text-gray-900 sm:text-5xl">
@@ -226,7 +206,6 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
                     height={96}
                     className="w-24 h-24 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
                   />
-
                   <p className="leading-relaxed mb-6">{testimonial.comment}</p>
                   <a className="inline-flex items-center">
                     <span className="flex-grow flex flex-col pl-4">
@@ -240,34 +219,11 @@ const Home = ({ Tshirts, Hoodies, Jeans, Caps, Shoes }) => {
           </div>
         </div>
       </section>
-
-      <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Wear the code with - CraftCrove.com</h1>
-            <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">Wear whatever you want? What do you want? you want code? so why not wear the code?</p>
-          </div>
-          <div className="flex flex-wrap -m-4">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="border border-gray-200 p-6 rounded-lg transform hover:scale-105 duration-300 ease-in-out">
-                  <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-pink-100 text-pink-500 mb-4">
-                    {/* SVG Icons */}
-                  </div>
-                  <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Dynamic Title</h2>
-                  <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway tile poke farm.</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 
 export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState) {
@@ -279,7 +235,7 @@ export async function getServerSideProps(context) {
     let processedProducts = {};
     for (let item of products) {
       if (item.title in processedProducts) {
-        if (!processedProducts[item.title].size.includes(item.size) && item.availableQty > 0) {
+        if (!processedProducts[item.title].color.includes(item.color) && item.availableQty > 0) {
           processedProducts[item.title].color.push(item.color);
         }
         if (!processedProducts[item.title].size.includes(item.size) && item.availableQty > 0) {
@@ -290,35 +246,25 @@ export async function getServerSideProps(context) {
         if (item.availableQty > 0) {
           processedProducts[item.title].color = [item.color];
           processedProducts[item.title].size = [item.size];
-        } else {
-          // Ensure even products with 0 quantity are initialized with empty arrays
-          processedProducts[item.title].color = [];
-          processedProducts[item.title].size = [];
         }
       }
     }
     return processedProducts;
   };
 
-  // Query for the latest 3 products of each category
-  const categories = ['Tshirts', 'Hoodies', 'Jeans', 'Caps', 'Shoes'];
-  let results = {};
+  const tshirts = await Product.find({ category: "Tshirts" });
+  const hoodies = await Product.find({ category: "Hoodies" });
+  const jeans = await Product.find({ category: "Jeans" });
+  const caps = await Product.find({ category: "Caps" });
+  const shoes = await Product.find({ category: "Shoes" });
 
-  for (let category of categories) {
-    let products = await product.find({ category: category }).sort({ createdAt: -1 }).limit(3);
-    results[category] = processProducts(products);
-  }
-
-  // Convert the objects to a format suitable for JSON serialization
   return {
     props: {
-      Tshirts: JSON.parse(JSON.stringify(results['Tshirts'])),
-      Hoodies: JSON.parse(JSON.stringify(results['Hoodies'])),
-      Jeans: JSON.parse(JSON.stringify(results['Jeans'])),
-      Caps: JSON.parse(JSON.stringify(results['Caps'])),
-      Shoes: JSON.parse(JSON.stringify(results['Shoes'])),
+      Tshirts: processProducts(tshirts),
+      Hoodies: processProducts(hoodies),
+      Jeans: processProducts(jeans),
+      Caps: processProducts(caps),
+      Shoes: processProducts(shoes),
     },
   };
 }
-
-
