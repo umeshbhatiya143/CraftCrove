@@ -111,7 +111,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
       </div>
 
       {/* Side Cart */}
-      <div ref={ref} className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute top-0 right-0 bg-pink-100 p-8 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div ref={ref} className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute z-20 top-0 right-0 bg-pink-100 p-8 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
         <h2 className='font-bold text-xl text-center'>Shopping Cart</h2>
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl text-pink-500">
           <AiFillCloseCircle />
