@@ -9,3 +9,8 @@
     /* For Safari */
     /* border: 1px solid rgba(255, 255, 255, 0.25); */
 }
+
+.sideCart {
+    transition: transform 0.3s ease-in-out;
+    scrollbar-width: none;
+} 

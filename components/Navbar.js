@@ -38,7 +38,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
 
   return (
     <div className='w-full relative overflow-hidden'>
-      <div className="z-20 flex justify-center md:justify-between w-full h-16 px-2 border-b border-gray-400 flex-row items-center mb-1 shadow-md fixed bg-white md:px-10">
+      <div className="z-20 flex justify-center md:justify-between w-full h-16 px-2 border-b border-gray-400 flex-row items-center mb-1 shadow-md fixed bg-white md:px-4 lg:px-8">
         <div className="flex justify-between h-20 -ml-2 md:ml-0 md:h-28 w-full md:w-auto">
           <Link href="/" legacyBehavior>
             <a>
@@ -90,7 +90,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
         {/* Cart & Account Section */}
         <div className="flex gap-2 cursor-pointer cart items-center">
           <span onMouseOver={() => { setdropdown(true) }} onMouseLeave={() => { setdropdown(false) }}>
-            {dropdown && <div className="absolute right-12 bg-white shadow-lg border top-8 py-2 rounded-md px-5 w-32">
+            {dropdown && <div className="absolute right-20 bg-white shadow-lg border top-12 py-2 rounded-md px-5 w-32">
               <ul>
                 <Link href={`/profile/${userId}`}><a><li className='py-1 hover:text-pink-700 text-sm font-bold'>My Account</li></a> </Link>
                 <Link href={"/orders"}><a><li className='py-1 hover:text-pink-700 text-sm font-bold'>Orders</li></a> </Link>
@@ -111,7 +111,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
       </div>
 
       {/* Side Cart */}
-      <div ref={ref} className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute z-20 top-0 right-0 bg-pink-100 p-8 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div ref={ref} className={`w-72 h-screen sideCart overflow-y-scroll fixed z-20 top-0 right-0 bg-pink-100 p-8 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
         <h2 className='font-bold text-xl text-center'>Shopping Cart</h2>
         <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-2xl text-pink-500">
           <AiFillCloseCircle />
