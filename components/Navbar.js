@@ -5,6 +5,7 @@ import { AiOutlineShoppingCart, AiOutlineMenu, AiFillCloseCircle, AiFillPlusCirc
 import { RxCrossCircled } from "react-icons/rx";
 import { BsFillBagCheckFill } from 'react-icons/bs';
 import { MdAccountCircle } from 'react-icons/md';
+import { IoBagCheck, IoPerson, IoLogOut } from "react-icons/io5";
 import { jwtDecode } from 'jwt-decode';
 
 const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subtotal }) => {
@@ -90,11 +91,11 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
         {/* Cart & Account Section */}
         <div className="flex gap-2 cursor-pointer cart items-center">
           <span onMouseOver={() => { setdropdown(true) }} onMouseLeave={() => { setdropdown(false) }}>
-            {dropdown && <div className="absolute right-20 bg-white shadow-lg border top-12 py-2 rounded-md px-5 w-32">
+            {dropdown && <div className="absolute right-20 bg-white shadow-lg border-t-2 border-pink-600 top-12 py-2 rounded-md px-5">
               <ul>
-                <Link href={`/profile/${userId}`}><a><li className='py-1 hover:text-pink-700 text-sm font-bold'>My Account</li></a> </Link>
-                <Link href={"/orders"}><a><li className='py-1 hover:text-pink-700 text-sm font-bold'>Orders</li></a> </Link>
-                <li onClick={logout} className='py-1 hover:text-pink-700 text-sm font-bold'>Logout</li>
+                <Link href={`/profile/${userId}`}><a><li className='flex gap-4 items-center py-2 hover:text-pink-700 text-sm font-bold'><IoPerson size={20}/> My Account</li></a> </Link>
+                <Link href={"/orders"}><a><li className='flex gap-4 items-center py-2 hover:text-pink-700 text-sm font-bold'><IoBagCheck size={20}/>Orders</li></a> </Link>
+                <li onClick={logout} className='flex gap-4 items-center py-2 hover:text-pink-700 text-sm font-bold'><IoLogOut size={20}/>Logout</li>
               </ul>
             </div>}
             {user.value && <MdAccountCircle size={30} className='text-xl md:text-2xl mx-2' />}
