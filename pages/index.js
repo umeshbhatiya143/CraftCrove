@@ -60,8 +60,9 @@ const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} })
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* slider  */}
-      <section className="relative overflow-hidden">
+      {/* hero section  */}
+      <section className="relative overflow-hidden w-full h-full">
+        {/* Swiper Component */}
         <Swiper
           modules={[Autoplay]}
           slidesPerView={1}
@@ -70,32 +71,36 @@ const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} })
             disableOnInteraction: false,
           }}
           loop={true}
-          className="relative"
+          className="relative w-full lg:h-[92vh] h-[45vh]" // Adjusted height for mobile
         >
           {slideContent.map((slide, index) => (
-            <SwiperSlide key={index}>
-              <div className="w-full h-[94vh] flex items-center justify-center">
+            <SwiperSlide key={index} className="relative w-full h-full">
+              <div className="absolute inset-0 flex items-center justify-center">
                 <Image
                   src={slide.image}
                   alt="slider image"
                   layout="fill"
-                  objectFit="cover"
+                  objectFit="cover" // Cover for large screens
+                  className="lg:object-cover sm:object-contain" // Contain for small screens
                 />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
 
-        {/* desc */}
-        <div className='absolute z-10 top-0 w-full h-screen flex justify-center items-center'>
-          <div className="flex flex-col gap-3 items-center -mt-14 justify-center w-[1000px] h-[600px] text-white bg-glassy px-28 rounded-lg shadow-md">
-            <h2 className="text-6xl font-black mb-4">CraftCrove</h2>
-            <span className="text-1xl font-bold text-pink-500">
+        {/* Description Section */}
+        <div className='absolute z-10 top-0 w-full h-[45vh] lg:h-screen flex justify-center items-center'>
+          <div className="flex flex-col items-center text-center gap-2 lg:gap-6 justify-center -mt-10 w-[350px] h-[200px] lg:w-[550px] lg:h-[300px] text-white bg-glassy px-6 rounded-lg shadow-md 
+     md:w-[450px] md:h-[250px] sm:w-[350px] sm:h-[220px] sm:gap-4 sm:px-4">
+            <h2 className="text-2xl lg:text-4xl font-black mb-2 lg:mb-4">Welcome to Your Fashion Destination</h2>
+            <span className="text-[16px] md:text-[18px] lg:text-[20px] h-[40px] font-bold text-pink-600">
               <Typewriter
-                words={['Discover the latest trends in fashion.',
-                  'Elevate your style with our exclusive collections.',
-                  'Find your perfect fit with StyleHub.',
-                  'Fashion-forward apparel and accessories just for you.',]}
+                words={[
+                  'Discover the latest trends in fashion.',
+                  'Elevate your style with exclusive collections.',
+                  'Find your perfect fit with our curated selections.',
+                  'Fashion-forward apparel and accessories just for you.',
+                ]}
                 loop={true}
                 cursor
                 cursorStyle='|'
@@ -104,7 +109,7 @@ const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} })
                 delaySpeed={1000}
               />
             </span>
-            <p className="text-lg mb-8">Explore the ultimate collection of t-shirts, jeans, hoodies, caps, and shoes.</p>
+            <p className="text-[12px] lg:text-[16px] mb-2 lg:mb-4">Explore a premium collection of t-shirts, jeans, hoodies, caps, and shoes designed for the modern you.</p>
           </div>
         </div>
       </section>
@@ -119,7 +124,7 @@ const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} })
           </h4>
           <div className="flex flex-wrap gap-10">
             {Object.keys(Tshirts).length > 0 ? Object.keys(Tshirts).map((item, index) => (
-              <Card product={Tshirts[item]} key={index}/>
+              <Card product={Tshirts[item]} key={index} />
             )) : <p>No T-Shirts available</p>}
           </div>
         </div>
@@ -134,7 +139,7 @@ const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} })
           </h4>
           <div className="flex flex-wrap -m-4 ">
             {Object.keys(Hoodies).length > 0 ? Object.keys(Hoodies).map((item, index) => (
-              <Card product={Hoodies[item]} key={index}/>
+              <Card product={Hoodies[item]} key={index} />
             )) : <p>No Hoodies available</p>}
           </div>
         </div>
@@ -150,7 +155,7 @@ const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} })
           </h4>
           <div className="flex flex-wrap -m-4">
             {Object.keys(Jeans).length > 0 ? Object.keys(Jeans).map((item, index) => (
-              <Card product={Jeans[item]} key={index}/>
+              <Card product={Jeans[item]} key={index} />
             )) : <p>No Jeans available</p>}
           </div>
         </div>
@@ -166,7 +171,7 @@ const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} })
           </h4>
           <div className="flex flex-wrap -m-4">
             {Object.keys(Caps).length > 0 ? Object.keys(Caps).map((item, index) => (
-              <Card product={Caps[item]} key={index}/>
+              <Card product={Caps[item]} key={index} />
             )) : <p>No Caps available</p>}
           </div>
         </div>
@@ -181,7 +186,7 @@ const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} })
           </h4>
           <div className="flex flex-wrap -m-4">
             {Object.keys(Shoes).length > 0 ? Object.keys(Shoes).map((item, index) => (
-              <Card product={Shoes[item]} key={index}/>
+              <Card product={Shoes[item]} key={index} />
             )) : <p>No Shoes available</p>}
           </div>
         </div>

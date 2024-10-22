@@ -37,7 +37,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
   }
 
   return (
-    <>
+    <div className='w-full relative overflow-hidden'>
       <div className="z-20 flex justify-center md:justify-between w-full h-16 px-2 border-b border-gray-400 flex-row items-center mb-1 shadow-md fixed bg-white md:px-10">
         <div className="flex justify-between h-20 -ml-2 md:ml-0 md:h-28 w-full md:w-auto">
           <Link href="/" legacyBehavior>
@@ -141,7 +141,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
             Clear cart</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

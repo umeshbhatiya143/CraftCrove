@@ -129,8 +129,8 @@ export default function App({ Component, pageProps }) {
     />
     <ToastContainer />
     <Navbar logout={logout} user={user} key={key} addToCart={addToCart} clearCart={clearCart} removeFromCart={removeFromCart} cart={cart} subtotal={subtotal} />
-    <div className='pt-24'>
-    <Component buyNow={buyNow} addToCart={addToCart} clearCart={clearCart} removeFromCart={removeFromCart} cart={cart} subtotal={subtotal} {...pageProps} />
+    <div className='pt-16'>
+      <Component buyNow={buyNow} addToCart={addToCart} clearCart={clearCart} removeFromCart={removeFromCart} cart={cart} subtotal={subtotal} {...pageProps} />
     </div>
     <Footer />
   </>
