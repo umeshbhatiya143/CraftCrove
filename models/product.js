@@ -10,6 +10,10 @@ const ProductSchema = new mongoose.Schema({
     color: {type:String},
     price: {type: Number, required:true},
     availableQty: {type: Number, required:true},
+    discount: {type: Number},
+    rating: {type: Number}, // rating out of 5
+    reviewCount: {type: Number}, // total number of reviews
+    seller:{type: String, required:true}
    
 }, {timestmps:true} )
 

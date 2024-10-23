@@ -4,16 +4,18 @@ import { toast } from 'react-toastify';
 import { FaHeart } from 'react-icons/fa';
 
 const Card = ({ product }) => {
+  // console.log("card", product)
   const product1 = {
     slug: product.slug,
     img: product.img,
     title: product.title,
-    price: 39.99, // original price
+    price: product.price, // original price
     discount: 30, // discount percentage (this can vary)
-    size: ['S', 'M', 'L'],
-    color: ['#FF0000', '#00FF00', '#0000FF'], // color options
+    size: product.size,
+    color: product.color, // color options
     rating: 4, // rating out of 5
     reviewCount: 120, // total number of reviews
+    seller:"CraftCrove"
   };
 
   const discountedPrice = (product1.price * (1 - product1.discount / 100)).toFixed(2);
@@ -40,7 +42,7 @@ const Card = ({ product }) => {
     <div className="group border mb-1 sm:mb-10 block min-h-[40vh] lg:min-h-[58vh] w-full max-w-[13rem] sm:min-w-[15rem] mx-auto overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
       <div className="relative cursor-pointer h-full max-h-[25vh] lg:max-h-[40vh] overflow-hidden bg-no-repeat bg-cover">
         {/* Product Image */}
-        <Link href={`/product/${product1.slug}`} legacyBehavior>
+        <Link href={`/product/${product1.title}`} legacyBehavior>
           <img
             src={product1.img}
             alt={product1.title}
