@@ -39,7 +39,7 @@ const handler = async (req, res) => {
             // console.log('User ID:', userId);
     
             // // Find and update the user
-            const user = await User.findByIdAndUpdate(userId, req.body, { new: true });
+            const user = await User.findByIdAndUpdate(userId, req.body);
     
             // // If no user is found, send a 404 response
             if (!user) {

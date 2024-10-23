@@ -10,6 +10,17 @@
     /* border: 1px solid rgba(255, 255, 255, 0.25); */
 }
 
+/* Hide scrollbar for all browsers */
+*::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;     /* Firefox */
+  }
+  
+
 .sideCart {
     transition: transform 0.3s ease-in-out;
     scrollbar-width: none;
