@@ -7,6 +7,9 @@ import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import LoadingBar from 'react-top-loading-bar'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 export default function App({ Component, pageProps }) {
   const [cart, setcart] = useState({})

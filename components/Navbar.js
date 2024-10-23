@@ -40,7 +40,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subt
   return (
     <div className='w-full relative overflow-hidden'>
       <div className="z-20 flex justify-center md:justify-between w-full h-16 px-2 border-b border-gray-400 flex-row items-center mb-1 shadow-md fixed bg-white md:px-4 lg:px-8">
-        <div className="flex justify-between h-20 -ml-2 md:ml-0 md:h-28 w-full md:w-auto">
+        <div className="flex justify-between h-20 -ml-4 md:h-28 w-full md:w-auto">
           <Link href="/" legacyBehavior>
             <a>
               <img src="/logo.png" className="object-cover h-full w-full" alt="logo" />

@@ -18,8 +18,8 @@ const Card = ({ product }) => {
 
   return (
     <Link href={`/product1/${product1.slug}`} legacyBehavior>
-      <a className="group block w-full max-w-[13rem] sm:max-w-[15rem] mx-auto overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
-        <div className="relative overflow-hidden bg-no-repeat bg-cover" style={{ height: '40vh' }}>
+      <a className="group block min-h-[40vh] lg:min-h-[58vh] w-full max-w-[13rem] sm:min-w-[15rem] mx-auto overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
+        <div className="relative h-full max-h-[25vh] lg:max-h-[40vh] overflow-hidden bg-no-repeat bg-cover">
           {/* Product Image */}
           <img 
             src={product1.img} 
@@ -49,7 +49,7 @@ const Card = ({ product }) => {
           <div className="absolute inset-0 bg-black opacity-20 transition-opacity duration-300 ease-in-out"></div>
         </div>
 
-        <div className="p-2"> {/* Reduced padding here */}
+        <div className="p-2 h-full"> {/* Reduced padding here */}
           {/* Product Title */}
           <h3 className="text-md font-semibold text-center text-gray-800">{product1.title}</h3>
 
