@@ -11,7 +11,7 @@ const Tshirts = ({ products }) => {
       <section className="pt-6 text-gray-600 body-font">
         <div className="container mx-auto">
           <div className="flex justify-center w-full text-3xl font-bold text-pink-500 mb-10">Our Premium Tshirts</div>
-          <div className="flex gap-10 flex-wrap mb-10 justify-center">
+          <div className="flex gap-4 flex-wrap mb-10 justify-center">
             {Object.keys(products).map((item,index) => {
               return (
 

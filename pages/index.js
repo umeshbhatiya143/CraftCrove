@@ -118,11 +118,19 @@ const Home = ({ Tshirts = {}, Hoodies = {}, Jeans = {}, Caps = {}, Shoes = {} })
 
       {/* tshirts */}
       <section className="body-font bg-gray-50">
-        <div className="container mx-auto px-5 py-24">
-          <h4 className="mb-20 text-3xl font-bold text-center text-pink-500 sm:text-5xl">
-            Our Premium T-Shirts
-          </h4>
-          <div className="flex flex-wrap gap-10">
+        <div className="container mx-auto px-[2px] sm:px-5 py-20">
+          <div className="flex flex-col gap-4 items-center justify-center mb-10">
+            <h5 className="tracking-[5px] text-blue-600 font-light text-xs uppercase">
+              OUR PREMIUM
+            </h5>
+            <h1 className="text-5xl font-bold tracking-tighter text-transparent bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text">
+              T-SHIRTS
+            </h1>
+          </div>
+
+
+
+          <div className="flex flex-wrap gap-1">
             {Object.keys(Tshirts).length > 0 ? Object.keys(Tshirts).map((item, index) => (
               <Card product={Tshirts[item]} key={index} />
             )) : <p>No T-Shirts available</p>}
