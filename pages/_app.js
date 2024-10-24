@@ -47,10 +47,10 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     const handleRouteChangeStart = () => setProgress(40);
     const handleRouteChangeComplete = () => setProgress(100);
-    
+
     router.events.on('routeChangeStart', handleRouteChangeStart);
     router.events.on('routeChangeComplete', handleRouteChangeComplete);
-    
+
     return () => {
       router.events.off('routeChangeStart', handleRouteChangeStart);
       router.events.off('routeChangeComplete', handleRouteChangeComplete);
@@ -89,7 +89,8 @@ export default function App({ Component, pageProps }) {
       for (let i = 0; i < keys.length; i++) {
         subt += myCart[keys[i]].price * myCart[keys[i]].qty;
       }
-      setSubtotal(subt);
+
+      setSubtotal(subt.toFixed(2));
     } catch (error) {
       console.error("Error saving cart:", error);
       toast.error("Failed to save cart. Please try again.", toastOptions);

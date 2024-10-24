@@ -1,90 +1,61 @@
 const mongoose = require('mongoose');
 
-// Define schema for package booking details
-const bookingSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Reference to the User collection
-        required: true
-    },
-    package: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Package', // Reference to the Package collection
-        required: true
-    },
-    packageTitle: {
+const BookingSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  orderItems: [
+    {
+      productId: {
         type: String,
-        required:true
-    },
-    startDate: {
-        type: Date,
-        // required: true
-    },
-    endDate: {
-        type: Date,
-        // required: true
-    },
-    numberOfTravellers: {
+        ref: 'Product',
+        required: true,
+      },
+      quantity: {
         type: Number,
-        required: true
-    },
-    TravelersDetail: [
-        {
-            firstName: {
-                type: String
-            },
-            lastName: {
-                type: String
-            },
-            dob: {
-                type: Date
-            },
-            gender: {
-                type: String
-            },
-            aadhaarNumber: {
-                type: String
-            }
-        }
-    ],
-    journeyStatus: {
-        type: String,
-        enum: ['upcoming', 'completed', 'cancelled'],
-        default: 'pending'
-    },
-    totalPrice: {
+        required: true,
+      },
+      price: {
         type: Number,
-        required: true
+        required: true,
+      },
     },
-    gst: {
-        type: Number,
-        required: true
-    },
-    bookingStatus: {
-        type: String,
-        enum: ['pending', 'confirmed', 'cancelled'],
-        default: 'pending'
-    },
-    paymentStatus: {
-        type: String,
-        enum: ['pending', 'completed', 'failed'],
-        default: 'pending'
-    },
-    paymentDetails: {
-        orderId: {
-            type: String
-        },
-        paymentId: {
-            type: String
-        },
-        paymentMethod: {
-            type: String
-        }
-    },
+  ],
+  totalAmount: {
+    type: Number,
+    required: true,
+  },
+  shippingAddress: {
+    address: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    pincode: { type: String, required: true },
+    country: { type: String, required: true },
+  },
+  paymentStatus: {
+    type: String,
+    enum: ['pending', 'completed', 'failed'],
+    default: 'pending',
+  },
+  paymentId: {
+    type: String,  // Store payment transaction ID here
+  },
+  receiptId: {
+    type: String,  // Store Razorpay receipt ID
+  },
+  bookingDate: {
+    type: Date,
+    default: Date.now,
+  },
+  status: {
+    type: String,
+    enum: ['processing', 'shipped', 'delivered', 'cancelled'],
+    default: 'processing',
+  },
+});
 
-}, { timestamps: true });
+export default mongoose.models.Booking || mongoose.model('Booking', BookingSchema);
 
-// Define PackageBooking model
-const Booking = mongoose.model('booking', bookingSchema);
-
-module.exports = Booking;
+// module.exports = Booking;

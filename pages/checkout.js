@@ -6,17 +6,14 @@ import { AiFillCloseCircle, AiFillPlusCircle, AiFillMinusCircle } from 'react-ic
 import { BsFillBagCheckFill } from 'react-icons/bs';
 import { jwtDecode } from 'jwt-decode';
 import AddressForm from '../components/AddressForm'; // Import the AddressPopup component
+import RazorpayButton from '@/components/RazorpayButton';
 
 const Checkout = ({ cart, removeFromCart, addToCart, subtotal }) => {
   const ref = useRef();
-  const [selectedAddress, setSelectedAddress] = useState('');
+  const [selectedAddress, setSelectedAddress] = useState({});
   const [showAddAddress, setShowAddAddress] = useState(false);
   const [userId, setUserId] = useState()
   const [userData, setUserData] = useState([]);
-
-  const handlePayment = async (event) => {
-    // Payment logic...
-  };
 
   const handleAddAddress = (newAddress) => {
     // Logic to save the new address to the user's saved addresses
@@ -49,6 +46,8 @@ const Checkout = ({ cart, removeFromCart, addToCart, subtotal }) => {
     }
   };
 
+
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -68,17 +67,21 @@ const Checkout = ({ cart, removeFromCart, addToCart, subtotal }) => {
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Select Saved Address</label>
         <select
-          value={selectedAddress}
-          onChange={(e) => setSelectedAddress(e.target.value)}
+          value={selectedAddress ? selectedAddress.index : ''} // Bind the selected index
+          onChange={(e) => {
+            const selectedIndex = e.target.value;
+            setSelectedAddress(userData.savedAddresses[selectedIndex]); // Set the selected address by its index
+          }}
           className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-pink-500 focus:border-pink-500"
         >
           <option value="">Select an address</option>
           {userData.savedAddresses?.map((address, index) => (
-            <option key={index} value={address}>
+            <option key={index} value={index}>
               {address.name}, {address.city}, {address.state}, {address.pincode}
             </option>
           ))}
         </select>
+
         <button
           onClick={() => setShowAddAddress(true)}
           className="mt-2 text-pink-500 underline"
@@ -126,12 +129,34 @@ const Checkout = ({ cart, removeFromCart, addToCart, subtotal }) => {
         <span>Total: ₹{subtotal}</span>
       </div>
 
-      <button
+      {/* <button
         onClick={handlePayment}
         className="mt-4 w-full bg-pink-500 text-white font-semibold py-2 rounded-md shadow hover:bg-pink-600 transition duration-200"
       >
         Pay Now
-      </button>
+      </button> */}
+
+      {/* payment button */}
+
+      <RazorpayButton
+        amount={subtotal}
+        userId={userId}
+        orderItems={
+          Object.keys(cart).map((key) => ({
+            productId: key,
+            quantity: cart[key]["qty"],
+            price: cart[key]["price"],
+          }))
+        }
+        shippingAddress={{
+          address: selectedAddress.address,
+          city: selectedAddress.city,
+          state: selectedAddress.state,
+          pincode: selectedAddress.pincode,
+          country: selectedAddress.country
+        }}
+      />
+
     </div>
   );
 };
