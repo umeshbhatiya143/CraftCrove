@@ -7,9 +7,12 @@ import { BsFillBagCheckFill } from 'react-icons/bs';
 import { jwtDecode } from 'jwt-decode';
 import AddressForm from '../components/AddressForm'; // Import the AddressPopup component
 import RazorpayButton from '@/components/RazorpayButton';
+import { useRouter } from 'next/router';
 
 const Checkout = ({ cart, removeFromCart, addToCart, subtotal }) => {
   const ref = useRef();
+  const router = useRouter();
+
   const [selectedAddress, setSelectedAddress] = useState({});
   const [showAddAddress, setShowAddAddress] = useState(false);
   const [userId, setUserId] = useState()
@@ -47,7 +50,6 @@ const Checkout = ({ cart, removeFromCart, addToCart, subtotal }) => {
   };
 
 
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -55,7 +57,14 @@ const Checkout = ({ cart, removeFromCart, addToCart, subtotal }) => {
       setUserId(decodedToken.id);
       fetchUserData(decodedToken.id);
     }
+    else {
+      router.push('/login');
+    }
   }, []);
+
+  useEffect(() => {
+    //re-render when new address added"
+  }, [userData]);
 
   return (
     <div className='max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg'>
