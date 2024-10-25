@@ -7,7 +7,6 @@ import { BsFillBagCheckFill } from 'react-icons/bs';
 import { MdAccountCircle } from 'react-icons/md';
 import { IoBagCheck, IoPerson, IoLogOut } from "react-icons/io5";
 import { jwtDecode } from 'jwt-decode';
-i
 
 const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subtotal }) => {
   const ref = useRef()
